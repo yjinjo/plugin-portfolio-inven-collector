@@ -1,0 +1,27 @@
+search:
+  fields:
+    - 이름: data.name
+    - 시가총액 순위: data.market_cap_rank
+table:
+  sort:
+    key: data.market_cap_rank
+    desc: true
+  fields:
+    - 이름: data.name
+    - 가격: data.current_price
+    - 가격 업데이트 시간 (UTC): data.last_updated
+    - 시가총액 순위: data.market_cap_rank
+    - 24시간 변동률 (%): data.price_change_percentage_24h
+    - 24시간 최저가: data.low_24h
+    - 24시간 최고가: data.high_24h
+tabs.0:
+  name: Details
+  type: item
+  fields:
+    - 이름: data.name
+    - 가격: data.current_price
+    - 가격 업데이트 시간 (UTC): data.last_updated
+    - 시가총액 순위: data.market_cap_rank
+    - 24시간 변동률 (%): data.price_change_percentage_24h
+    - 24시간 최저가: data.low_24h
+    - 24시간 최고가: data.high_24h

@@ -2,10 +2,13 @@ import logging
 
 from spaceone.core.manager import BaseManager
 from spaceone.inventory.plugin.collector.lib import (
+    make_cloud_service,
     make_cloud_service_type,
     make_error_response,
     make_response,
 )
+
+from src.plugin.connector.cryptocurrency_connector import CryptoConnector
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -48,4 +51,19 @@ class CryptoManager(BaseManager):
         )
 
     def collect_cloud_service(self, options, secret_data, schema):
-        pass
+        crypto_connector = CryptoConnector()
+        cryptocurrencies = crypto_connector.list_cryptocurrencies()
+
+        for crypto in cryptocurrencies:
+            cloud_service = make_cloud_service(
+                name=crypto["name"],
+                cloud_service_type=self.cloud_service_type,
+                cloud_service_group=self.cloud_service_group,
+                provider=self.provider,
+                data=crypto,
+                data_format="dict",
+            )
+            yield make_response(
+                cloud_service=cloud_service,
+                match_keys=[["name", "reference.resource_id", "account", "provider"]],
+            )
