@@ -1,4 +1,8 @@
+from typing import Generator
+
 from spaceone.inventory.plugin.collector.lib.server import CollectorPluginServer
+
+from src.plugin.manager.cryptocurrency_manager import CryptoManager
 
 app = CollectorPluginServer()
 
@@ -40,7 +44,7 @@ def collector_verify(params: dict) -> None:
 
 
 @app.route("Collector.collect")
-def collector_collect(params: dict) -> dict:
+def collector_collect(params: dict) -> Generator[dict, None, None]:
     """Collect external data
 
     Args:
@@ -105,7 +109,12 @@ def collector_collect(params: dict) -> dict:
 
         Only one of the cloud_service_type, cloud_service and region fields is required.
     """
-    pass
+    options = params["options"]
+    secret_data = params["secret_data"]
+    schema = params.get("schema")
+
+    crypto_mgr = CryptoManager()
+    return crypto_mgr.collect_resources(options, secret_data, schema)
 
 
 @app.route("Job.get_tasks")
