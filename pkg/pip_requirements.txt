@@ -1,0 +1,3 @@
+spaceone-api
+pre-commit
+pycoingecko
