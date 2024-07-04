@@ -18,7 +18,7 @@ def collector_init(params: dict) -> dict:
             'metadata': 'dict'
         }
     """
-    pass
+    return {"metadata": {"options_schema": {}}}
 
 
 @app.route("Collector.verify")
