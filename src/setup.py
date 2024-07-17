@@ -35,7 +35,7 @@ setup(
         "pycoingecko",
     ],
     package_data={
-        "plugin": ["metadata/*.yaml", "metrics/**/**/*.yaml"],
+        "plugin": ["metadata/**/*.yaml", "metrics/**/**/*.yaml"],
     },
     zip_safe=False,
 )

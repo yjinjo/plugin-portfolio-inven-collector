@@ -2,7 +2,7 @@ from typing import Generator
 
 from spaceone.inventory.plugin.collector.lib.server import CollectorPluginServer
 
-from src.plugin.manager.cryptocurrency_manager import CryptoManager
+from plugin.manager.cryptocurrency_manager import CryptoManager
 
 app = CollectorPluginServer()
 

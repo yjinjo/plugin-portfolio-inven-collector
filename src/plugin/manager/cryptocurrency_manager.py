@@ -8,7 +8,7 @@ from spaceone.inventory.plugin.collector.lib import (
     make_response,
 )
 
-from src.plugin.connector.cryptocurrency_connector import CryptoConnector
+from plugin.connector.cryptocurrency_connector import CryptoConnector
 
 _LOGGER = logging.getLogger(__name__)
 
