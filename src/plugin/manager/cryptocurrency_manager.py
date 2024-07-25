@@ -1,4 +1,5 @@
 import logging
+import os
 
 from spaceone.core.manager import BaseManager
 from spaceone.inventory.plugin.collector.lib import (
@@ -11,6 +12,8 @@ from spaceone.inventory.plugin.collector.lib import (
 from plugin.connector.cryptocurrency_connector import CryptoConnector
 
 _LOGGER = logging.getLogger(__name__)
+_CURRENT_DIR = os.path.dirname(__file__)
+_METADATA_DIR = os.path.join(_CURRENT_DIR, "../metadata/")
 
 
 class CryptoManager(BaseManager):
@@ -20,7 +23,9 @@ class CryptoManager(BaseManager):
         self.provider = "portfolio"
         self.cloud_service_group = "Portfolio"
         self.cloud_service_type = "Cryptocurrency"
-        self.metadata_path = "metadata/portfolio/cryptocurrency.yaml"
+        self.metadata_path = os.path.join(
+            _METADATA_DIR, "portfolio/cryptocurrency.yaml"
+        )
 
     def collect_resources(self, options, secret_data, schema):
         try:

@@ -1,3 +1,4 @@
 spaceone-api
 pre-commit
 pycoingecko
+grpcio
