@@ -3,8 +3,8 @@ import os
 
 from spaceone.core.manager import BaseManager
 from spaceone.inventory.plugin.collector.lib import (
-    make_cloud_service,
     make_cloud_service_type,
+    make_cloud_service_with_metadata,
     make_error_response,
     make_response,
 )
@@ -21,10 +21,10 @@ class CryptoManager(BaseManager):
         super().__init__(*args, **kwargs)
 
         self.provider = "portfolio"
-        self.cloud_service_group = "Portfolio"
+        self.cloud_service_group = "Investment"
         self.cloud_service_type = "Cryptocurrency"
         self.metadata_path = os.path.join(
-            _METADATA_DIR, "portfolio/cryptocurrency.yaml"
+            _METADATA_DIR, "investment/cryptocurrency.yaml"
         )
 
     def collect_resources(self, options, secret_data, schema):
@@ -60,13 +60,14 @@ class CryptoManager(BaseManager):
         cryptocurrencies = crypto_connector.list_cryptocurrencies()
 
         for crypto in cryptocurrencies:
-            cloud_service = make_cloud_service(
+            cloud_service = make_cloud_service_with_metadata(
                 name=crypto["name"],
                 cloud_service_type=self.cloud_service_type,
                 cloud_service_group=self.cloud_service_group,
                 provider=self.provider,
                 data=crypto,
                 data_format="dict",
+                metadata_path=self.metadata_path,
             )
             yield make_response(
                 cloud_service=cloud_service,

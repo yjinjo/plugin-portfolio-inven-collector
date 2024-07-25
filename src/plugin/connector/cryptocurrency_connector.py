@@ -25,9 +25,9 @@ class CryptoConnector(BaseConnector):
                         "name": coin["name"],
                         "current_price": coin["current_price"],
                         "market_cap_rank": coin["market_cap_rank"],
-                        "price_change_percentage_24h": coin[
-                            "price_change_percentage_24h"
-                        ],
+                        "price_change_percentage_24h": str(
+                            coin["price_change_percentage_24h"]
+                        ),
                         "high_24h": coin["high_24h"],
                         "low_24h": coin["low_24h"],
                         "last_updated": coin["last_updated"],
